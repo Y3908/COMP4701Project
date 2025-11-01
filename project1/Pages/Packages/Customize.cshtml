@@ -1,0 +1,52 @@
+@page "{id:int}"
+@model project1.Pages.Packages.CustomizeModel
+@{
+    ViewData["Title"] = "Customize Package";
+}
+
+<a asp-page="Details" asp-route-id="@Model.PackageId">&larr; Back to Details</a>
+<h1>Customize Package</h1>
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="PackageId" />
+    <input type="hidden" id="BasePrice" value="@Model.BasePrice" />
+
+    <div class="mb-3">
+        <label class="form-label">Destinations (comma-separated)</label>
+        <input asp-for="Destinations" class="form-control" />
+        <span asp-validation-for="Destinations" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Duration (days)</label>
+        <input asp-for="DurationDays" class="form-control" />
+        <span asp-validation-for="DurationDays" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Estimated Price</label>
+        <input asp-for="EstimatedPrice" class="form-control" readonly />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Proceed to Booking</button>
+</form>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    (function () {
+        function recalc() {
+            var base = parseFloat($("#BasePrice").val() || 0);
+            var days = parseInt($("#DurationDays").val() || 1);
+            var price = base;
+            if (days > 1) {
+                price = Math.round((base * (1 + (days - 1) * 0.05)) * 100) / 100;
+            }
+            $("#EstimatedPrice").val(price);
+        }
+        $("#DurationDays").on("input", recalc);
+        $(document).ready(recalc);
+    })();
+ </script>
+
+

@@ -1,0 +1,35 @@
+@page
+@model project1.Pages.Bookings.IndexModel
+@{
+    ViewData["Title"] = "All Packages";
+}
+
+<h1>All Packages</h1>
+
+<div class="row g-4">
+@foreach (var p in Model.Packages)
+{
+    <div class="col-12 col-md-6 col-xl-4">
+        <div class="card h-100">
+            @if (!string.IsNullOrWhiteSpace(p.ImageUrl))
+            {
+                <img class="card-img-top" src="@p.ImageUrl" alt="@p.Title" style="object-fit:cover;height:200px;" />
+            }
+            <div class="card-body">
+                <h5 class="card-title">@p.Title</h5>
+                <p class="card-text">@p.Description</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="badge text-bg-primary">@p.BasePrice.ToString("0 OMR \\ Person")</span>
+                    <div class="btn-group">
+                        <a class="btn btn-outline-primary btn-sm" asp-page="/Packages/Details" asp-route-id="@p.PackageID">Details</a>
+                        <a class="btn btn-primary btn-sm" asp-page="/Bookings/Create" asp-route-packageId="@p.PackageID">Book</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+</div>
+
+
+

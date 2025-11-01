@@ -1,0 +1,31 @@
+@page
+@model project1.Pages.Admin.IndexModel
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<h1>Admin Dashboard</h1>
+
+<p class="text-muted">MVP placeholder: manage packages and view bookings.</p>
+
+<div class="row g-3">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">Packages</div>
+            <div class="card-body">
+                <a asp-page="/Packages/Index" class="btn btn-outline-primary">View Packages</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">Bookings</div>
+            <div class="card-body">
+                <a asp-page="/Index" class="btn btn-outline-secondary">View Recent Bookings (to implement)</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,56 @@
+@page
+@model project1.Pages.Reviews.CreateModel
+@{
+    ViewData["Title"] = "Write a Review";
+}
+
+<a asp-page="/Packages/Details" asp-route-id="@Model.PackageId">&larr; Back to Package</a>
+<h1>Write a Review</h1>
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="PackageId" />
+
+    <div class="mb-3">
+        <label class="form-label">Your Email</label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Rating</label>
+        <select asp-for="Rating" class="form-select">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <span asp-validation-for="Rating" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Comment</label>
+        <textarea asp-for="Comment" rows="4" class="form-control"></textarea>
+        <small id="charCount" class="form-text text-muted">0 characters</small>
+    </div>
+
+    <div class="form-check mb-3">
+        <input class="form-check-input" type="checkbox" id="agree" required>
+        <label class="form-check-label" for="agree">I agree to share my review publicly.</label>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Submit Review</button>
+ </form>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    $(function(){
+        $("#Comment").on("input", function(){
+            $("#charCount").text($(this).val().length + " characters");
+        });
+    });
+</script>
+
+
